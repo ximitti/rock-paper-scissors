@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const PlacarBox = styled.div`
   margin: 10px auto;
+  padding: 10px;
   border: 1px solid #fff;
   border-radius: 15px;
   width: 100%;
@@ -10,7 +11,7 @@ export const PlacarBox = styled.div`
   flex-flow: column nowrap;
   align-items: center;
 
-  h3 {
-    margin: 10px auto;
+  h4 {
+    margin: 5px auto;
   }
 `;

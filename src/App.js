@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react";
+import { FaHandPaper, FaHandScissors, FaHandRock } from "react-icons/fa";
 import "./App.css";
 import { playerWin, machineWin } from "./winConditions";
 import Container from "./components/Container";
 import Placar from "./components/Placar";
 import PlacarBox from "./components/PlacarBox";
+import Tabuleiro from "./components/Tabuleiro";
+import Painel from "./components/Painel";
+import Player from "./components/Player";
+import ButtonPlay from "./components/ButtonPlay";
 
 function App() {
   const [player, setPlayer] = useState(null);
@@ -69,45 +74,55 @@ function App() {
       <header className="App-header">
         <Container>
           <Placar>
-            <h3>Placar</h3>
+            <h4>Placar</h4>
             <PlacarBox>
+              <Player name={"Jogador"} score={score.player} />
+              <Player name={"Bot"} score={score.machine} />
+            </PlacarBox>
+          </Placar>
+          <Tabuleiro>
+            <div>
               <div>
-                Player: <span>{score.player}</span>
+                Jogada máquina:
+                {machine && <span>{machine}</span>}
               </div>
               <hr />
               <div>
-                Máquina: <span>{score.machine}</span>
+                Jogada player:
+                {player && <span>{player}</span>}
               </div>
-            </PlacarBox>
-          </Placar>
-          <hr />
-          <div className="tabuleiro">
-            {!result && (
-              <div>
-                <div>
-                  Jogada máquina:
-                  {machine && <span>{machine}</span>}
-                </div>
-                <hr />
-                <div>
-                  Jogada player:
-                  {player && <span>{player}</span>}
-                </div>
-              </div>
-            )}
-            {result && (
-              <div>
-                <h3>Vencedor: {result} </h3>
-                <button onClick={resetGame}>Jogar novamente</button>
-              </div>
-            )}
-          </div>
-          <hr />
-          <div className="painel">
-            {!result && <button onClick={() => playerPlay(1)}>Pedra</button>}
-            {!result && <button onClick={() => playerPlay(2)}>Papel</button>}
-            {!result && <button onClick={() => playerPlay(3)}>Tesoura</button>}
-          </div>
+            </div>
+            <hr />
+            <div>
+              <h3>Vencedor: {result} </h3>
+              <button disabled={result ? false : true} onClick={resetGame}>
+                Jogar novamente
+              </button>
+            </div>
+          </Tabuleiro>
+          <Painel>
+            <ButtonPlay
+              disabled={!result ? false : true}
+              func={playerPlay}
+              number={1}
+            >
+              <FaHandRock />
+            </ButtonPlay>
+            <ButtonPlay
+              disabled={!result ? false : true}
+              func={playerPlay}
+              number={2}
+            >
+              <FaHandPaper />
+            </ButtonPlay>
+            <ButtonPlay
+              disabled={!result ? false : true}
+              func={playerPlay}
+              number={3}
+            >
+              <FaHandScissors />
+            </ButtonPlay>
+          </Painel>
         </Container>
       </header>
     </div>

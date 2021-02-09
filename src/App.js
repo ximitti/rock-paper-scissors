@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import { playerWin, machineWin } from "./winConditions";
+import Container from "./components/Container";
+import Placar from "./components/Placar";
+import PlacarBox from "./components/PlacarBox";
 
 function App() {
   const [player, setPlayer] = useState(null);
@@ -12,7 +15,7 @@ function App() {
     if (player && machine) {
       checkResult(player, machine);
     }
-  }, [player, machine, result]);
+  }, [player]);
 
   const machinePlay = () => {
     const random = Math.floor(Math.random() * 3 + 1);
@@ -27,6 +30,7 @@ function App() {
   const checkResult = (player, machine) => {
     if (player === machine) {
       setResult("Empate!");
+      return;
     }
     let p = false;
     playerWin.forEach((element) => {
@@ -63,10 +67,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <div className="container">
-          <div className="placar">
+        <Container>
+          <Placar>
             <h3>Placar</h3>
-            <div>
+            <PlacarBox>
               <div>
                 Player: <span>{score.player}</span>
               </div>
@@ -74,23 +78,27 @@ function App() {
               <div>
                 Máquina: <span>{score.machine}</span>
               </div>
-            </div>
-          </div>
+            </PlacarBox>
+          </Placar>
           <hr />
           <div className="tabuleiro">
-            <div>
-              Jogada máquina:
-              {machine && <span>{machine}</span>}
-            </div>
-            <hr />
-            <div>
-              Jogada player:
-              {player && <span>{player}</span>}
-            </div>
+            {!result && (
+              <div>
+                <div>
+                  Jogada máquina:
+                  {machine && <span>{machine}</span>}
+                </div>
+                <hr />
+                <div>
+                  Jogada player:
+                  {player && <span>{player}</span>}
+                </div>
+              </div>
+            )}
             {result && (
               <div>
                 <h3>Vencedor: {result} </h3>
-                <button onClick={() => resetGame()}>Jogar novamente</button>
+                <button onClick={resetGame}>Jogar novamente</button>
               </div>
             )}
           </div>
@@ -100,7 +108,7 @@ function App() {
             {!result && <button onClick={() => playerPlay(2)}>Papel</button>}
             {!result && <button onClick={() => playerPlay(3)}>Tesoura</button>}
           </div>
-        </div>
+        </Container>
       </header>
     </div>
   );

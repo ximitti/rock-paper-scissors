@@ -9,6 +9,8 @@ import Tabuleiro from "./components/Tabuleiro";
 import Painel from "./components/Painel";
 import Player from "./components/Player";
 import ButtonPlay from "./components/ButtonPlay";
+import Plays from "./components/Plays";
+import Result from "./components/Result";
 
 function App() {
   const [player, setPlayer] = useState(null);
@@ -57,7 +59,7 @@ function App() {
       }
     });
     if (m) {
-      setResult("Máquina!");
+      setResult("Bot!");
       setScore({ ...score, machine: score.machine + 1 });
       return;
     }
@@ -81,25 +83,14 @@ function App() {
             </PlacarBox>
           </Placar>
           <Tabuleiro>
-            <div>
-              <div>
-                Jogada máquina:
-                {machine && <span>{machine}</span>}
-              </div>
-              <hr />
-              <div>
-                Jogada player:
-                {player && <span>{player}</span>}
-              </div>
-            </div>
+            <Plays name="Bot" play={machine} />
             <hr />
-            <div>
-              <h3>Vencedor: {result} </h3>
-              <button disabled={result ? false : true} onClick={resetGame}>
-                Jogar novamente
-              </button>
-            </div>
+            <Plays name="Jogador" play={player} />
           </Tabuleiro>
+          <Result>
+            {result && <h3>Vencedor: {result} </h3>}
+            {result && <button onClick={resetGame}>Jogar novamente</button>}
+          </Result>
           <Painel>
             <ButtonPlay
               disabled={!result ? false : true}

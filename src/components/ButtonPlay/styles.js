@@ -13,4 +13,8 @@ export const PlayButton = styled.button`
     cursor: pointer;
     transform: scale(1.5);
   }
+
+  &:disabled {
+    opacity: 0.5;
+  }
 `;

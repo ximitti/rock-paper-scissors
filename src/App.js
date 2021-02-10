@@ -22,6 +22,7 @@ function App() {
     if (player && machine) {
       checkResult(player, machine);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [player]);
 
   const machinePlay = () => {

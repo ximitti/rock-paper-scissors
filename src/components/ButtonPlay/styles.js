@@ -8,6 +8,7 @@ export const PlayButton = styled.button`
   padding: 10px;
   color: #fff;
   font-size: 40px;
+  transition: 0.3s cubic-bezier(0.38, -0.69, 0.36, 0.43);
 
   &:hover {
     cursor: pointer;
@@ -15,6 +16,7 @@ export const PlayButton = styled.button`
   }
 
   &:disabled {
+    pointer-events: none;
     opacity: 0.5;
   }
 `;
